@@ -3,15 +3,19 @@ const app = express()
 const port = 5000
 const bodyParser = require('body-parser');
 
-//application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({extended: true}));
-//application/json
-app.use(bodyParser.json());
+const config = require('./config/key');
 
 const { User } = require("./models/User");
 
+//application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({extended: true}));
+
+//application/json
+app.use(bodyParser.json());
+
+
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://kyuri0927:tkfkddl0927@boiler-plate.q32faxf.mongodb.net/?retryWrites=true&w=majority',{
+mongoose.connect(config.mongoURI,{
 }).then(()=>console.log('MongoDB Connected...'))
   .catch(err=>console.log(err))
 
